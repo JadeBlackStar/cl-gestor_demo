@@ -1,0 +1,33 @@
+CL GESTOR - INICIO DE SESION REAL Y SINCRONIZACION
+
+La app ahora integra Supabase Auth y una fila JSON por usuario en una tabla protegida por RLS.
+Para que funcione, debes crear/configurar TU proyecto Supabase. No se incluye una cuenta, proyecto,
+URL ni clave real porque deben pertenecer al propietario (Casa Lora).
+
+1. Ve a https://supabase.com y crea un proyecto.
+2. En Project Settings > API, copia Project URL y la clave anon/public (NO la service_role).
+3. En CL_Gestor index.html, busca:
+   const SUPABASE_URL="PON_AQUI_TU_URL";
+   const SUPABASE_ANON_KEY="PON_AQUI_TU_ANON_KEY";
+   y reemplaza ambos valores por los de tu proyecto.
+4. En Supabase, abre SQL Editor y ejecuta todo el contenido de CL_Gestor_SUPABASE.sql.
+5. En Authentication > Providers, verifica que Email esté habilitado.
+   Puedes activar/desactivar confirmación por correo según tu preferencia de pruebas.
+6. Publica index.html y casa_lora_logo.png juntos en GitHub Pages (o un hosting HTTPS).
+   No abras desde file:// si puedes evitarlo; usa hosting web.
+7. Abre el sitio, registra una cuenta con correo y contraseña (8+ caracteres) y accede.
+8. En otro dispositivo, abre el mismo sitio e inicia sesión con la misma cuenta.
+
+IMPORTANTE:
+- La clave anon/public se puede exponer en el frontend; la seguridad la proporcionan Auth + RLS.
+- Nunca uses ni publiques la service_role key.
+- Cada cuenta almacena sus propios datos. No compartas credenciales.
+- Realtime escucha cambios de la misma cuenta en otros dispositivos. El guardado se escribe localmente
+  primero y después se sincroniza en nube con un breve retraso.
+- Conserva exportaciones JSON periódicas como respaldo adicional.
+- Esta app no es un sistema contable certificado ni una herramienta de cumplimiento de privacidad.
+- Los datos de clientes (identificables) requieren cuidado: limita quién tiene acceso y no recopiles
+  información innecesaria. RLS protege la fila de cada cuenta, pero el proyecto y el hosting deben
+  configurarse correctamente.
+
+Tecnologías: HTML, CSS, JavaScript y Supabase (Auth, PostgreSQL JSONB, Row Level Security, Realtime).
